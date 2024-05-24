@@ -23,6 +23,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private int paddlePosX = 320;
 
     public Gameplay(){
+
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -34,7 +35,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     public void paint(Graphics g){
         //background
         g.setColor(Color.black);
-        g.fillRect(1,1,692,392);
+        g.fillRect(1,1,692,592);
 
         g.setColor(Color.yellow);
         g.fillRect(0,0,3,592);
@@ -47,13 +48,15 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setColor(Color.yellow);
         g.fillOval(ballPosX,ballPosY,20,20);
 
+        g.dispose();
 
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        repaint();
+        timer.start();
     }
 
     @Override
@@ -64,17 +67,17 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            if(paddlePosX >= 600){
-                paddlePosX = 600;
+            if(paddlePosX >= 580){
+                paddlePosX = 580;
             } else {
-                moveLeft();
+                moveRight();
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            if(paddlePosX >= 600){
-                paddlePosX = 600;
+            if(paddlePosX <= 10){
+                paddlePosX = 10;
             } else {
-                moveRight();
+                moveLeft();
             }
         }
     }
@@ -83,4 +86,14 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     public void keyReleased(KeyEvent e) {
 
     }
+    public void moveRight(){
+        play = true;
+        paddlePosX += 20;
+    }
+    public void moveLeft(){
+        play = true;
+        paddlePosX -= 20;
+    }
+
+
 }
